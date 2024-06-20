@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "author": "Ksenia Votinova",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "start": "node dist/src/index.js",
+    "build": "rm -rf ./dist && tsc"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
