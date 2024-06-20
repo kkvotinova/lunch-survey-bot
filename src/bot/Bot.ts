@@ -4,6 +4,7 @@ import { Update } from "telegraf/typings/core/types/typegram";
 import { isCommandAccessible, replyWithPoll } from "./Bot.utils";
 import { BotCallbackContext, BotCommand } from "./Bot.types";
 import cron, { ScheduledTask } from "node-cron";
+import { version } from "../../package.json";
 
 class Bot {
   private bot: Telegraf<Context<Update>> | null = null;
@@ -23,6 +24,7 @@ class Bot {
     this.botCommands = [
       { name: "start", callback: this.commandStart },
       { name: "stop", callback: this.commandStop },
+      { name: "info", callback: this.commandInfo },
     ];
   }
 
@@ -40,6 +42,10 @@ class Bot {
   private commandStop(ctx: BotCallbackContext) {
     this.cronTask?.stop();
     ctx.reply("Bot has been successfully turned off! ☠️");
+  }
+
+  private commandInfo(ctx: BotCallbackContext) {
+    ctx.reply(`Version ${version}`);
   }
 
   private initializeBotCommands() {
